@@ -1,4 +1,4 @@
-# Groxio OTP course
+# Groxio/Elixir Chatt/Elixir Kenya OTP course
 Groxio training
 
 ## 1 Install these tools, plus Elixir
