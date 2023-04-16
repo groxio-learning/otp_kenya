@@ -18,7 +18,7 @@ For the development dependencies, you'll need:
 run the command: 
 
 ```
-[otp_class] ➔ elixir -v
+[otp_kenya] ➔ elixir -v
 Erlang/OTP 25 [erts-13.1.3] [source] [64-bit] [smp:10:10] [ds:10:10:10] [async-threads:1] [jit]
 
 Elixir 1.14.2 (compiled with Erlang/OTP 25)
@@ -28,7 +28,7 @@ Elixir 1.14.2 (compiled with Erlang/OTP 25)
 Verify that observer is working (helpful but optional):
 
 ```
-[otp_class] -> iex
+[otp_kenya] -> iex
 iex(1)> :observer.start
 ```
 
@@ -39,9 +39,9 @@ You will see a window come up and the `:ok` return code. Don't save this for the
 
 1. Fork this repository to your github account. 
 
-- Go to https://github.com/groxio-learning/otp_class
+- Go to https://github.com/groxio-learning/otp_kenya
 - Click the `fork` button in the upper right corner
-- Navigate to *your local version* (at something like git@github.com:your-github-user/otp_class.git. )
+- Navigate to *your local version* (at something like git@github.com:your-github-user/otp_kenya.git. )
 - Copy the clone address to your clipboard. Click the bright green `code` button, then click the copy-to-clipboard button on the `clone` page.
 
 2. Clone your local version to your local machine. 
@@ -51,44 +51,44 @@ You will see a window come up and the `:ok` return code. Don't save this for the
 ```
 >  git clone <paste the url>
 ...clones repo...
-cd otp_class
+cd otp_kenya
 ```
 
 - Verify your remote: 
 
 ```
 $ git remote -v
-> origin  https://github.com/your-user/otp_class.git (fetch)
-> origin  https://github.com/your-user/otp_class.git (push)
+> origin  https://github.com/your-user/otp_kenya.git (fetch)
+> origin  https://github.com/your-user/otp_kenya.git (push)
 ```
 
 - If there's no origin, set it. Make sure you *replace your-github-user*:
 
 ```
-otp_class> git remote add origin https://github.com/your-github-user/otp_class.git
+otp_kenya> git remote add origin https://github.com/your-github-user/otp_kenya.git
 ```
 
 - Verify your remote: 
 
 ```
 $ git remote -v
-> origin  https://github.com/your-user/otp_class.git (fetch)
-> origin  https://github.com/your-user/otp_class.git (push)
+> origin  https://github.com/your-user/otp_kenya.git (fetch)
+> origin  https://github.com/your-user/otp_kenya.git (push)
 ```
 
 - Set the upstream to the Groxio repo:
 
 ```
-otp_class> git remote add upstream https://github.com/groxio-learning/otp_class.git
+otp_kenya> git remote add upstream https://github.com/groxio-learning/otp_kenya.git
 ```
 
 - Verify the remotes: 
 
 ```
-> origin  https://github.com/your-user/otp_class.git (fetch)
-> origin  https://github.com/your-user/otp_class.git (push)
-> upstream  https://github.com/groxio-learning/otp_class.git (fetch)
-> upstream  https://github.com/groxio-learning/otp_class.git (push)
+> origin  https://github.com/your-user/otp_kenya.git (fetch)
+> origin  https://github.com/your-user/otp_kenya.git (push)
+> upstream  https://github.com/groxio-learning/otp_kenya.git (fetch)
+> upstream  https://github.com/groxio-learning/otp_kenya.git (push)
 ```
 
 3. Now check out your setup. Send me a pull request: Edit the file "pull_requests.md" and add your name: 
