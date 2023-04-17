@@ -1,2 +1,5 @@
 - Bruce Tate
 - Napoleon Ahiable
+- Pollet Obuya
+- Amos Kibet
+- Nyakio Muriuki 
