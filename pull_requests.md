@@ -1,2 +1,2 @@
 - Bruce Tate
-- 
+- Amos Kibet
