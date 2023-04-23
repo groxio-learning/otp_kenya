@@ -4,3 +4,4 @@
 - Amos Kibet
 - Nyakio Muriuki 
 - Tracey Onim
+- David Otieno
