@@ -1,18 +1,24 @@
 defmodule Kikapu do
   @moduledoc """
-  Documentation for `Kikapu`.
+  API for Kikapu Service
   """
 
-  @doc """
-  Hello world.
+  alias Kikapu.ServiceOTP, as: Server
 
-  ## Examples
+  def new(input \\ []) do
+    {:ok, kikapu} = Server.start_link(input)
+    kikapu
+  end
 
-      iex> Kikapu.hello()
-      :world
+  def add(kikapu, key, value) do
+    GenServer.cast(kikapu, {:add, key, value})
+  end
 
-  """
-  def hello do
-    :world
+  def remove(kikapu, key) do
+    GenServer.cast(kikapu, {:remove, key})
+  end
+
+  def get(kikapu, key) do
+    GenServer.call(kikapu, {:get, key})
   end
 end
