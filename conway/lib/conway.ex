@@ -1,18 +1,24 @@
 defmodule Conway do
   @moduledoc """
-  Documentation for `Conway`.
+  API to interact with conway game of life service
   """
 
-  @doc """
-  Hello world.
+  alias Conway.Service
 
-  ## Examples
+  def new() do
+    {:ok, board} = Service.start_link(nil)
+    board
+  end
 
-      iex> Conway.hello()
-      :world
+  def next_generation(board) do
+    GenServer.call(board, :next_gen) |> print_board()
+  end
 
-  """
-  def hello do
-    :world
+  def show_board(board) do
+    GenServer.call(board, :show_board) |> print_board()
+  end
+
+  defp print_board(board) do
+    IO.puts(board)
   end
 end
