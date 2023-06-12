@@ -8,8 +8,7 @@ defmodule Conway.Application do
   @impl true
   def start(_type, _args) do
     children = [
-      # Starts a worker by calling: Conway.Worker.start_link(arg)
-      # {Conway.Worker, arg}
+      {Conway.Server, %{}}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
