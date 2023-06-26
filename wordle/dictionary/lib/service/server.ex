@@ -18,4 +18,9 @@ defmodule Dictionary.Service.Server do
   def random_word do
     Agent.get(@name, &WordList.random_word/1)
   end
+
+  @spec word_list() :: list(String.t)
+  def word_list do
+    Agent.get(@name, fn list -> list end)
+  end
 end

@@ -1,9 +1,9 @@
-defmodule Dictionary.MixProject do
+defmodule Wordle.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :dictionary,
+      app: :wordle,
       version: "0.1.0",
       elixir: "~> 1.14",
       start_permanent: Mix.env() == :prod,
@@ -14,14 +14,15 @@ defmodule Dictionary.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      mod: {Dictionary.Service.Application, []},
-      extra_applications: [:logger]
+      extra_applications: [:logger],
+      mod: {Wordle.Application, []}
     ]
   end
 
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:dictionary, path: "../dictionary"},
       {:dialyxir, "~> 1.0", only: [:dev], runtime: false}
     ]
   end
