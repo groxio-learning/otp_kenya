@@ -21,11 +21,16 @@ defmodule Wordle.Service.Server do
   def handle_call({:guess_word, guess}, _from, game) do
     {updated_game, score} = Game.guess_word(game, guess)
 
-    {:reply, score, updated_game}
+    {:reply, {:ok, score}, updated_game}
+  end
+
+  @impl true
+  def handle_call(:not_a_word, _from, game) do
+    {:reply, {:error, "Not A Word!"}, game}
   end
 
   @impl true
   def handle_call(:score, _from, game) do
-    {:reply, Game.score(game), game}
+    {:reply, Game.score(game) , game}
   end
 end

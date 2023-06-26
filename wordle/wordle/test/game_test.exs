@@ -29,14 +29,6 @@ defmodule Wordle.GameTest do
       end
     end
 
-    test "checks if the guessed word is in dictionary and doesn't score unknown words", %{game: game} do
-      {new_game, _score} = Game.guess_word(game, "qwzrt")
-
-      assert new_game.state == :continue
-      assert new_game.turns_left == 6
-      assert new_game.guessed == []
-    end
-
     test "correct word wins game", %{game: game} do
       {new_game, _score} = Game.guess_word(game, "noise")
 

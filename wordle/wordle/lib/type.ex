@@ -1,7 +1,7 @@
 defmodule Wordle.Type do
   @moduledoc false
 
-  @type state :: :initializing | :won | :lost | :not_a_word | :continue
+  @type state :: :initializing | :won | :lost | :continue
 
   @type score :: %{
     state: state,

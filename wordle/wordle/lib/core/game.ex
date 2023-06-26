@@ -8,7 +8,7 @@ defmodule Wordle.Core.Game do
     state: Type.state,
     word: String.t(),
     turns_left: integer(),
-    guessed: list(map())
+    guessed: list(map()),
   }
 
   defstruct(
@@ -41,25 +41,12 @@ defmodule Wordle.Core.Game do
 
   def guess_word(game, guess) do
     game
-    |> accept_guess(guess, Enum.member?(Dictionary.word_list(), guess))
+    |> score_guess(guess)
     |> return_with_score()
-  end
-
-  defp accept_guess(game, guess, _in_dictionary=false) do
-    %{game | state: :not_a_word} |> score_guess(guess)
-  end
-
-  defp accept_guess(game, guess, _in_dictionary=true) do
-     score_guess(game, guess)
   end
 
   defp score_guess(%{turns_left: 1}=game, _guess) do
     %{ game | state: :lost, turns_left: 0 }
-  end
-
-  # TODO: Raise error that guess is not a word before continue
-  defp score_guess(%{state: :not_a_word}=game, _guess) do
-    %{ game | state: :continue }
   end
 
   defp score_guess(game, guess) do
