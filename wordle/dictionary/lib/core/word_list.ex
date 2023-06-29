@@ -11,6 +11,7 @@ defmodule Dictionary.Core.WordList do
     |> Path.expand(__DIR__)
     |> File.read!()
     |> String.split(~r/\n/, trim: true)
+    |> MapSet.new()
   end
 
   @spec random_word(t) :: String.t

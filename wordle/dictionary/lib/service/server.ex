@@ -26,8 +26,6 @@ defmodule Dictionary.Service.Server do
 
   @spec is_member?(String.t) :: boolean
   def is_member?(guess) when is_binary(guess) do
-    word_list()
-    |> MapSet.new()
-    |> MapSet.member?(guess)
+    Agent.get(@name, &MapSet.member?(&1, guess))
   end
 end
