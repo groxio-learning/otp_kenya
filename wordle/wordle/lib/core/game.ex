@@ -45,8 +45,13 @@ defmodule Wordle.Core.Game do
     |> return_with_score()
   end
 
-  defp score_guess(%{turns_left: 1}=game, _guess) do
-    %{ game | state: :lost, turns_left: 0 }
+  defp score_guess(%{turns_left: 1}=game, guess) do
+    %{
+      game |
+        state: :lost,
+        turns_left: 0,
+        guessed: [color_guess(game, guess) | game.guessed]
+    }
   end
 
   defp score_guess(game, guess) do
