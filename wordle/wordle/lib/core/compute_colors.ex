@@ -6,17 +6,14 @@ defmodule Wordle.Core.ComputeColors do
   """
   @spec execute(String.t(), String.t()) :: tuple()
   def execute(guess, answer \\ @answer) do
-    # goal = {greens, yellows, blacks}
     greens = get_greens(guess, answer)
 
-    # blacks = guess -- ans
     blacks = get_blacks(guess, answer)
 
-    # yellows = guess -- (greens ++ blacks)
-    yellows = get_yellows(guess, blacks ++ greens)
+    yellows = guess |> get_yellows(blacks ++ greens)
 
     greens
-    |> prepare_response(blacks, yellows)
+    |> format_response(blacks, yellows)
   end
 
   @doc """
@@ -40,16 +37,18 @@ defmodule Wordle.Core.ComputeColors do
   """
   @spec get_blacks(String.t(), String.t()) :: list()
   def get_blacks(guess, answer) do
-    guesses = guess
-    |> guesses(answer)
-    |> remove_index()
+    guesses =
+      guess
+      |> guesses(answer)
+      |> remove_index()
 
-    answer = guess
-    |> answer(answer)
-    |> remove_index()
+    answer =
+      guess
+      |> answer(answer)
+      |> remove_index()
 
     # assign index.
-    guesses -- answer
+    (guesses -- answer)
     |> Enum.map(fn letter ->
       index = Enum.find_index(guesses, fn g -> letter == g end)
       {letter, index}
@@ -60,7 +59,12 @@ defmodule Wordle.Core.ComputeColors do
   gets the characters that are correct but in the wrong positions
   """
   def get_yellows(guess, blacks_and_greens) do
-     guesses(guess, @answer) -- blacks_and_greens
+    yellows = guesses(guess, @answer) -- blacks_and_greens
+
+    yellows
+    |> Enum.map(fn {char, index} ->
+      {char, index}
+    end)
   end
 
   defp guesses(guess, answer) do
@@ -93,14 +97,21 @@ defmodule Wordle.Core.ComputeColors do
     end)
   end
 
-  defp prepare_response(greens, blacks, yellows) do
-    {formatter(greens), formatter(yellows), formatter(blacks)}
+  def format_response(greens, blacks, yellows) do
+    greens = add_color(greens, :green)
+    blacks = add_color(blacks, :black)
+    yellows = add_color(yellows, :yellow)
+
+    (greens ++ blacks ++ yellows)
+    |> Enum.sort(&(elem(&1, 1) <= elem(&2, 1)))
+    |> Enum.reduce([], fn {ansi, _index}, acc -> acc ++ [ansi] end)
+    |> IO.puts()
   end
 
-  defp formatter(list) when is_list(list) do
+  def add_color(list, color) do
     list
-    |> Enum.reduce("", fn {letter, index}, acc ->
-      "#{acc}#{letter}#{index}"
+    |> Enum.map(fn {char, index} ->
+      {IO.ANSI.format([color, char]), index}
     end)
   end
 end
