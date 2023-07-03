@@ -23,4 +23,9 @@ defmodule Dictionary.Service.Server do
   def word_list do
     Agent.get(@name, fn list -> list end)
   end
+
+  @spec is_member?(String.t) :: boolean
+  def is_member?(guess) when is_binary(guess) do
+    Agent.get(@name, &MapSet.member?(&1, guess))
+  end
 end

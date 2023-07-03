@@ -9,20 +9,17 @@ defmodule Wordle do
   @opaque game :: Server.t
   @type score :: Type.score
 
-  # TODO: Update lifecycle
-  @spec new_game() :: game
-  def new_game() do
-    {:ok, game} = Server.start_link(nil)
-    game
+  @spec guess_word(String.t()) :: {:ok, score} | {:error, String.t()}
+  def guess_word(guess) do
+    if Dictionary.is_member?(guess) do
+      GenServer.call(:wordle, {:guess_word, guess})
+    else
+      GenServer.call(:wordle, :not_a_word)
+    end
   end
 
-  @spec guess_word(game, String.t()) :: score
-  def guess_word(game, guess) do
-    GenServer.call(game, {:guess_word, guess})
-  end
-
-  @spec game_score(game) :: score
-  def game_score(game) do
-    GenServer.call(game, :score)
+  @spec game_score() :: score
+  def game_score() do
+    GenServer.call(:wordle, :score)
   end
 end
