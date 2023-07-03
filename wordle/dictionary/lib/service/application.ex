@@ -5,7 +5,7 @@ defmodule Dictionary.Service.Application do
 
   def start(_type, _args) do
     children = [
-      { Dictionary.Service.Server, [] }
+      { Dictionary.Service.Server, [nil] }
     ]
 
     options = [

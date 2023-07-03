@@ -8,12 +8,12 @@ defmodule Wordle.Service.Server do
 
   alias Wordle.Core.Game
 
-  def start_link(_) do
-    GenServer.start_link(__MODULE__, nil)
+  def start_link(game) do
+    GenServer.start_link(__MODULE__, game, name: :wordle)
   end
 
   @impl true
-  def init(_) do
+  def init(_game) do
     { :ok, Game.new_game() }
   end
 
