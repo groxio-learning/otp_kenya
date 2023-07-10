@@ -8,12 +8,13 @@ defmodule Wordle.Service.Server do
 
   alias Wordle.Core.Game
 
-  def start_link(game) do
-    GenServer.start_link(__MODULE__, game, name: :wordle)
+  def start_link(name) do
+    GenServer.start_link(__MODULE__, name, name: name)
   end
 
   @impl true
-  def init(_game) do
+  def init(name) do
+    IO.puts "Starting #{name}"
     { :ok, Game.new_game() }
   end
 
@@ -32,5 +33,12 @@ defmodule Wordle.Service.Server do
   @impl true
   def handle_call(:score, _from, game) do
     {:reply, Game.score(game) , game}
+  end
+
+  def child_spec(name) do
+    %{
+      id: name,
+      start: {Wordle.Service.Server, :start_link, [name]}
+    }
   end
 end
