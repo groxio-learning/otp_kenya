@@ -10,16 +10,16 @@ defmodule Wordle do
   @type score :: Type.score
 
   @spec guess_word(String.t()) :: {:ok, score} | {:error, String.t()}
-  def guess_word(guess) do
+  def guess_word(name \\ :wordle, guess) do
     if Dictionary.is_member?(guess) do
-      GenServer.call(:wordle, {:guess_word, guess})
+      GenServer.call(name, {:guess_word, guess})
     else
-      GenServer.call(:wordle, :not_a_word)
+      GenServer.call(name, :not_a_word)
     end
   end
 
   @spec game_score() :: score
-  def game_score() do
-    GenServer.call(:wordle, :score)
+  def game_score(name \\ :wordle) do
+    GenServer.call(name, :score)
   end
 end
